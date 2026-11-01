@@ -1,0 +1,222 @@
+/* src/components/routes/AdminDashboard/AdminDashboard.module.css */
+.dashboardContainer {
+  display: flex;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background-color: #121212;
+  color: #fff;
+  font-family: inherit;
+}
+
+.sidebar {
+  width: 270px;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: #0d0d0d;
+  border-right: 1px solid #242424;
+  color: #fff;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebarTop {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.brandContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.brandIcon {
+  font-size: 28px;
+  background-color: rgba(255, 102, 0, 0.15);
+  border: 1px solid #ff6600;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarTitle {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.teamSubtitle {
+  font-size: 11px;
+  color: #ff6600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navMenu {
+  flex: 1;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navButton {
+  width: 100%;
+  text-align: left;
+  padding: 11px 14px;
+  background: transparent;
+  color: #b5b5b5;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttonIcon {
+  font-size: 16px;
+}
+
+.navButton:hover {
+  background-color: rgba(255, 102, 0, 0.12);
+  color: #fff;
+  border-color: rgba(255, 102, 0, 0.3);
+}
+
+.navButtonActive {
+  background-color: #ff6600 !important;
+  color: #fff !important;
+  border-color: #ff6600 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 102, 0, 0.35);
+}
+
+/* Sidebar Footer fixo na parte inferior */
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.publicSiteButton {
+  display: block;
+  text-align: center;
+  padding: 11px 14px;
+  background-color: #1a1a1a;
+  color: #ff9944;
+  border: 1px solid #383838;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.publicSiteButton:hover {
+  background-color: #242424;
+  border-color: #ff6600;
+  color: #fff;
+}
+
+.logoutButton {
+  padding: 11px;
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #f87171;
+  border: 1px solid #dc3545;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Conteúdo Principal com scroll próprio independente */
+.mainContent {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 30px;
+  background-color: #121212;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .mainContent {
+    padding: 16px;
+  }
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.badge {
+  background-color: rgba(255, 102, 0, 0.15);
+  border: 1px solid rgba(255, 102, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff8833;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  margin-top: 8px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.card {
+  background-color: #171717;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #262626;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 16px;
+  }
+}
