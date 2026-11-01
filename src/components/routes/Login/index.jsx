@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../../services/api';
 import styles from './Login.module.css';
+import logo from '../../../assets/imgs/brandLogo.jpeg'
 
 export function Login() {
   const [usuario, setUsuario] = useState('');
@@ -44,7 +45,7 @@ export function Login() {
     <div className={styles.loginContainer}>
       <div className={styles.loginCard}>
         <div className={styles.header}>
-          <div className={styles.brandIcon}>🏐</div>
+          <div className={styles.brandIcon}><img className={styles.logoImg} src={logo} alt="logo maturidade feliz" /></div>
           <h2 className={styles.loginTitle}>Painel MAFE</h2>
           <p className={styles.loginSubtitle}>Acesso Exclusivo da Coordenação</p>
         </div>
