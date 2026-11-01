@@ -108,7 +108,7 @@ export function Login() {
             className={styles.fillCredentialsBtn}
             disabled={carregando}
           >
-            ⚡ Preencher automaticamente
+            Preencher automaticamente
           </button>
         </div>
       </div>

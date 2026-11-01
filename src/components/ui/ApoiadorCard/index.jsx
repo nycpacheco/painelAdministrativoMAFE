@@ -34,7 +34,7 @@ export function ApoiadorCard({
               loading="lazy"
             />
             <div className={styles.zoomOverlay}>
-              <span>🔍 Detalhes</span>
+              <span>Detalhes</span>
             </div>
           </>
         )}
@@ -64,7 +64,7 @@ export function ApoiadorCard({
               className={styles.siteLink}
               title={`Acessar: ${apoiador.site_url}`}
             >
-              🌐 {apoiador.site_url.replace(/^https?:\/\//i, '')} ↗
+              {apoiador.site_url.replace(/^https?:\/\//i, '')} ↗
             </a>
           ) : (
             <span className={styles.semLink}>Nenhum link cadastrado</span>

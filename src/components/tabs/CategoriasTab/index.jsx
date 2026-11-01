@@ -193,7 +193,7 @@ export function CategoriasTab() {
 
       {/* Formulário para Criar Nova Categoria */}
       <form onSubmit={handleSolicitarCriarCategoria} className={styles.createCard} noValidate>
-        <h4>➕ Adicionar Nova Categoria de Evento</h4>
+        <h4>Adicionar Nova Categoria de Evento</h4>
         <div className={styles.createRow}>
           <input
             type="text"
@@ -283,7 +283,7 @@ export function CategoriasTab() {
                         className={styles.editButton}
                         disabled={salvando || String(excluindoId) === String(cat.id)}
                       >
-                        ✏️ Editar
+                        Editar
                       </button>
                       <button 
                         type="button"
@@ -291,7 +291,7 @@ export function CategoriasTab() {
                         className={styles.deleteButton}
                         disabled={salvando || String(excluindoId) === String(cat.id)}
                       >
-                        {String(excluindoId) === String(cat.id) ? 'Excluindo...' : '🗑️ Excluir'}
+                        {String(excluindoId) === String(cat.id) ? 'Excluindo...' : 'Excluir'}
                       </button>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ export function MidiaDetailModal({
     >
       <div className={styles.modal} role="dialog" aria-modal="true">
         <div className={styles.modalHeader}>
-          <h3>🔍 Detalhes da Mídia (ID: {midia.id})</h3>
+          <h3>Detalhes da Mídia (ID: {midia.id})</h3>
           <button 
             type="button" 
             onClick={onClose} 
@@ -70,7 +70,7 @@ export function MidiaDetailModal({
           <div className={styles.infoContainer}>
             <div className={styles.badgesRow}>
               <span className={styles.tipoBadge}>
-                {midia.tipo_midia === 'video' ? '🎬 Vídeo' : '📷 Foto'}
+                {midia.tipo_midia === 'video' ? 'Vídeo' : 'Foto'}
               </span>
               <span className={midia.ativo ? styles.statusAtivo : styles.statusInativo}>
                 {midia.ativo ? '● Ativo (Visível no site)' : '○ Inativo (Oculto)'}
@@ -124,7 +124,7 @@ export function MidiaDetailModal({
             className={styles.editButton}
             disabled={isAcaoEmAndamento}
           >
-            ✏️ Editar
+            Editar
           </button>
           <button 
             type="button" 
@@ -132,7 +132,7 @@ export function MidiaDetailModal({
             className={styles.deleteButton}
             disabled={isAcaoEmAndamento}
           >
-            🗑️ Excluir
+            Excluir
           </button>
           <button 
             type="button" 

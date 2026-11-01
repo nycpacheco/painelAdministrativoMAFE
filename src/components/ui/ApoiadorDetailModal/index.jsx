@@ -109,7 +109,7 @@ export function ApoiadorDetailModal({
             className={styles.editButton}
             disabled={isAcaoEmAndamento}
           >
-            ✏️ Editar
+            Editar
           </button>
           <button 
             type="button" 
@@ -117,7 +117,7 @@ export function ApoiadorDetailModal({
             className={styles.deleteButton}
             disabled={isAcaoEmAndamento}
           >
-            🗑️ Excluir
+            Excluir
           </button>
           <button 
             type="button" 

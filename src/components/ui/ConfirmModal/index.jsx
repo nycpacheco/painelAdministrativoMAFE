@@ -24,9 +24,9 @@ export function ConfirmModal({
       <div className={styles.modal}>
         <div className={styles.modalHeader}>
           <div className={`${styles.iconBadge} ${styles[tipo]}`}>
-            {tipo === 'perigo' && '🗑️'}
-            {tipo === 'sucesso' && '➕'}
-            {tipo === 'aviso' && '✏️'}
+            {tipo === 'perigo' && '⚠️'}
+            {tipo === 'sucesso' && '⚠️'}
+            {tipo === 'aviso' && '⚠️'}
           </div>
           <h3 className={styles.title}>{titulo}</h3>
         </div>

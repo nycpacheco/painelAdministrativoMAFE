@@ -11,10 +11,13 @@ import { CategoriasTab } from '../../tabs/CategoriasTab';
 import { ApoiadoresTab } from '../../tabs/ApoiadoresTab';
 import { EstatisticasTab } from '../../tabs/EstatisticasTab';
 
+//importanto logo
+import logo from '../../../assets/imgs/brandLogo.jpeg'
+
 // =========================================================================
 // URL DO SITE PÚBLICO:
 // Altere o link abaixo para a URL definitiva do site público quando desejar:
-const URL_SITE_PUBLICO = 'https://www.google.com';
+const URL_SITE_PUBLICO = 'https://site-mafe-v2.vercel.app/';
 // =========================================================================
 
 export function AdminDashboard() {
@@ -50,10 +53,10 @@ export function AdminDashboard() {
   };
 
   const titulosAbas = {
-    midias: '📁 Galeria de Mídias e Momentos',
-    categorias: '🏷️ Categorias de Eventos e Torneios',
-    apoiadores: '🤝 Apoiadores e Patrocinadores',
-    estatisticas: '📊 Estatísticas do Time'
+    midias: 'Galeria de Mídias e Momentos',
+    categorias: 'Categorias de Eventos e Torneios',
+    apoiadores: 'Apoiadores e Patrocinadores',
+    estatisticas: 'Estatísticas do Time'
   };
 
   return (
@@ -62,7 +65,7 @@ export function AdminDashboard() {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarTop}>
           <div className={styles.brandContainer}>
-            <div className={styles.brandIcon}>🏐</div>
+            <div className={styles.brandIcon}><img className={styles.logoImg} src={ logo } alt="Logo Maturidade Feliz" /></div>
             <div>
               <h2 className={styles.sidebarTitle}>Painel MAFE</h2>
               <span className={styles.teamSubtitle}>Maturidade Feliz</span>
@@ -120,7 +123,7 @@ export function AdminDashboard() {
             className={styles.publicSiteButton}
             title="Ir para o Site Público"
           >
-            🌐 Ir para o Site Público ↗
+            Ir para o Site Público ↗
           </a>
 
           <button 
@@ -128,7 +131,7 @@ export function AdminDashboard() {
             onClick={() => setModalLogoutAberto(true)} 
             className={styles.logoutButton}
           >
-            🚪 Sair do Sistema
+            Sair do Sistema
           </button>
         </div>
       </aside>

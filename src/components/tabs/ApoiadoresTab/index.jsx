@@ -184,7 +184,7 @@ export function ApoiadoresTab() {
 
       <div className={styles.header}>
         <div>
-          <h3>🤝 Gerenciamento de Apoiadores e Patrocinadores</h3>
+          <h3>Gerenciamento de Apoiadores e Patrocinadores</h3>
           <p className={styles.subtitle}>
             Parceiros oficiais que incentivam o vôlei adaptado da terceira idade.
           </p>
@@ -209,7 +209,7 @@ export function ApoiadoresTab() {
           className={styles.refreshBtn}
           title="Recarregar apoiadores"
         >
-          🔄 Atualizar Lista
+          Atualizar Lista
         </button>
       </div>
 

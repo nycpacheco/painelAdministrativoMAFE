@@ -90,7 +90,7 @@ export function ApoiadorModal({ isOpen, onClose, onSave, apoiadorParaEditar }) {
     <div className={styles.backdrop} onClick={(e) => { if (e.target === e.currentTarget && !salvando) onClose(); }}>
       <div className={styles.modal} role="dialog" aria-modal="true">
         <div className={styles.modalHeader}>
-          <h3>{apoiadorParaEditar ? '✏️ Editar Apoiador' : '➕ Cadastrar Novo Apoiador'}</h3>
+          <h3>{apoiadorParaEditar ? 'Editar Apoiador' : 'Cadastrar Novo Apoiador'}</h3>
           <button 
             type="button" 
             onClick={onClose} 

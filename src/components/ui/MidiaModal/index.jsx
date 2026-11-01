@@ -155,7 +155,7 @@ export function MidiaModal({
     <div className={styles.backdrop} onClick={(e) => { if (e.target === e.currentTarget && !salvando) onClose(); }}>
       <div className={styles.modal} role="dialog" aria-modal="true">
         <div className={styles.modalHeader}>
-          <h3>{midiaParaEditar ? '✏️ Editar Mídia' : '➕ Cadastrar Nova Mídia'}</h3>
+          <h3>{midiaParaEditar ? 'Editar Mídia' : 'Cadastrar Nova Mídia'}</h3>
           <button 
             type="button" 
             onClick={onClose} 
@@ -316,8 +316,8 @@ export function MidiaModal({
                 className={styles.select}
                 disabled={salvando}
               >
-                <option value="foto">📷 Foto</option>
-                <option value="video">🎬 Vídeo</option>
+                <option value="foto">Foto</option>
+                <option value="video">Vídeo</option>
               </select>
             </div>
 
