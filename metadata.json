@@ -1,0 +1,8 @@
+{
+  "name": "Maturidade Feliz (MAFE)",
+  "description": "Portal de mídias, eventos e painel administrativo do time de vôlei adaptado da terceira idade Maturidade Feliz (MAFE).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,262 @@
+/* src/components/tabs/CategoriasTab/CategoriasTab.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.createCard, .listContainer {
+  background-color: #171717;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.createCard h4, .listHeader h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e5e5e5;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hint {
+  font-size: 12px;
+  color: #777;
+}
+
+.createRow {
+  display: flex;
+  gap: 12px;
+}
+
+.input {
+  flex: 1;
+  background-color: #101010;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
+}
+
+.inputError {
+  border-color: #dc3545 !important;
+}
+
+.fieldError {
+  font-size: 12px;
+  color: #f87171;
+  font-weight: 500;
+}
+
+.addButton {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.addButton:hover:not(:disabled) {
+  background-color: #e55c00;
+  transform: translateY(-1px);
+}
+
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.categoryCard {
+  background-color: #121212;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  padding: 14px 18px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.categoryCard:hover {
+  border-color: #3e3e3e;
+}
+
+.viewMode, .editMode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.editMode {
+  width: 100%;
+}
+
+.editInputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.catId {
+  background-color: #242424;
+  color: #888;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.catName {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+}
+
+.editButton, .deleteButton, .cancelButton {
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.2s;
+  background-color: transparent;
+}
+
+.editButton {
+  color: #ff9944;
+  border: 1px solid #ff6600;
+}
+
+.editButton:hover:not(:disabled) {
+  background-color: #ff6600;
+  color: #fff;
+}
+
+.deleteButton {
+  color: #f87171;
+  border: 1px solid #dc2626;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.saveButton {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.cancelButton {
+  color: #aaa;
+  border: 1px solid #444;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #242424;
+  color: #fff;
+}
+
+.saveButton:disabled, .editButton:disabled, .deleteButton:disabled, .cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.emptyText {
+  color: #777;
+  font-size: 14px;
+  margin: 0;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #aaa;
+  gap: 16px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 102, 0, 0.2);
+  border-top-color: #ff6600;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
