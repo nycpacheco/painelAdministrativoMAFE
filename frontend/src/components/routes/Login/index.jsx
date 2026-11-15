@@ -98,19 +98,6 @@ export function Login() {
             {carregando ? 'Validando Acesso...' : 'Entrar no Painel Admin'}
           </button>
         </form>
-
-        <div className={styles.demoCredentialsBox}>
-          <p className={styles.demoTitle}>Credenciais de Acesso:</p>
-          <p className={styles.demoText}>Usuário: <code>coordenacao</code> | Senha: <code>123456</code></p>
-          <button 
-            type="button" 
-            onClick={preencherAcessoRapido} 
-            className={styles.fillCredentialsBtn}
-            disabled={carregando}
-          >
-            ⚡ Preencher automaticamente
-          </button>
-        </div>
       </div>
     </div>
   );

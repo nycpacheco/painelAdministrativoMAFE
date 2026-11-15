@@ -1,8 +1,11 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.security import check_password_hash
 from config import Config
 from models import db, Categoria, Midia, Apoiador, EstatisticaGrupo
+from functools import wraps
+from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -11,6 +14,16 @@ app.config.from_object(Config)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 db.init_app(app)
+with app.app_context():
+    try:
+        with db.engine.connect() as conexao:
+            resultado = conexao.execute(db.text("SELECT 1"))
+            print("CONEXÃO COM TIDB ESTABELECIDA!")
+            print("Resultado:", resultado.scalar())
+
+    except Exception as e:
+        print("ERRO REAL DE CONEXÃO COM TIDB:")
+        print(repr(e))
 
 # Criação automática das tabelas quando o banco de dados estiver configurado
 with app.app_context():
@@ -46,27 +59,71 @@ def status():
     )
 
 
+
 @app.route("/api/login", methods=["POST"])
 def login():
     """Autenticação da coordenação administrativa."""
     dados = request.get_json(silent=True) or {}
-    usuario = (dados.get("usuario") or dados.get("username") or "").strip()
-    senha = str(dados.get("senha") or dados.get("password") or "")
 
-    if usuario == app.config["ADMIN_USER"] and check_password_hash(app.config["ADMIN_PASSWORD_HASH"], senha):
-        return resposta_padrao(
-            sucesso=True,
-            dados={"usuario": usuario, "token": "token_jwt_mafe_autenticado"},
-            mensagem="Login realizado com sucesso.",
-            status_code=200
-        )
-    return resposta_padrao(
-        sucesso=False,
-        dados=None,
-        mensagem="Usuário ou senha incorretos!",
-        status_code=401
+    usuario = (
+        dados.get("usuario") or dados.get("username") or ""
+    ).strip()
+
+    senha = str(
+        dados.get("senha") or dados.get("password") or ""
     )
 
+    # Verifica as credenciais
+    if (
+        usuario != app.config["ADMIN_USER"]
+        or not check_password_hash(
+            app.config["ADMIN_PASSWORD_HASH"], senha
+        )
+    ):
+        return resposta_padrao(
+            False,
+            None,
+            "Usuário ou senha incorretos.",
+            401
+        )
+
+    # Só gera token depois de autenticar
+    token = gerar_token(usuario)
+
+    return resposta_padrao(
+        True,
+        {
+            "usuario": usuario,
+            "token": token
+        },
+        "Login realizado com sucesso.",
+        200
+    )
+
+
+@app.route("/api/auth/me", methods=["GET"])
+def verificar_autenticacao():
+    autenticacao = request.headers.get("Authorization", "")
+
+    if not autenticacao.startswith("Bearer "):
+        return resposta_padrao(
+            False, None, "Não autenticado.", 401
+        )
+
+    token = autenticacao.split(" ", 1)[1]
+    usuario = token_valido(token)
+
+    if not usuario:
+        return resposta_padrao(
+            False, None, "Sessão inválida ou expirada.", 401
+        )
+
+    return resposta_padrao(
+        True,
+        {"usuario": usuario},
+        "Sessão válida.",
+        200
+    )
 
 # =========================================================================
 # ROTAS ADMINISTRATIVAS - CATEGORIAS
@@ -237,6 +294,86 @@ def gerenciar_estatisticas():
     )
     return resposta_padrao(True, est.to_dict(), "Estatísticas atualizadas com sucesso.", 200)
 
+TOKEN_MAX_AGE = 8 * 60 * 60
+
+def gerar_token(usuario):
+    serializer = URLSafeTimedSerializer(
+        app.config["SECRET_KEY"],
+        salt="mafe-autenticacao"
+    )
+    return serializer.dumps({"usuario": usuario})
+
+
+def token_valido(token):
+    serializer = URLSafeTimedSerializer(
+        app.config["SECRET_KEY"],
+        salt="mafe-autenticacao"
+    )
+
+    try:
+        dados = serializer.loads(token, max_age=TOKEN_MAX_AGE)
+
+        if dados.get("usuario") != app.config["ADMIN_USER"]:
+            return None
+
+        return dados["usuario"]
+
+    except (BadSignature, SignatureExpired):
+        return None
+
+
+
+
+@app.before_request
+def proteger_rotas_administrativas():
+
+    # O navegador precisa disso para a verificação CORS.
+    # OPTIONS não executa operações de banco de dados.
+    if request.method == "OPTIONS":
+        return None
+
+    # Protege todas as rotas dentro de /api/admin
+    if (
+        request.path == "/api/admin"
+        or request.path.startswith("/api/admin/")
+    ):
+        autenticacao = request.headers.get("Authorization", "")
+
+        if not autenticacao.startswith("Bearer "):
+            return resposta_padrao(
+                False,
+                None,
+                "Acesso negado: autenticação obrigatória.",
+                401
+            )
+
+        token = autenticacao.split(" ", 1)[1].strip()
+
+        if not token:
+            return resposta_padrao(
+                False,
+                None,
+                "Acesso negado: token ausente.",
+                401
+            )
+
+        usuario = token_valido(token)
+
+        if not usuario:
+            return resposta_padrao(
+                False,
+                None,
+                "Acesso negado: sessão inválida ou expirada.",
+                401
+            )
+
+    return None
+
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )

@@ -6,7 +6,9 @@
 // =========================================================================
 // >>> [COLOCAR ROTA DE CONEXAO AQUI] <<<
 // Altere a URL abaixo para apontar para o seu backend Flask (local ou em produção):
-export const API_BASE_URL = 'http://localhost:5000/api'; // <<< [COLOCAR ROTA DE CONEXAO AQUI]
+const API_BASE_URL = (
+    import.meta.env.VITE_API_URL || 'http://localhost:5000'
+).replace(/\/+$/, '') + '/api';
 
 // =========================================================================
 // >>> [COMO PARAR DE USAR O ARMAZENAMENTO LOCAL SIMULADO] <<<
@@ -467,43 +469,63 @@ export const api = {
   },
 
   // --- AUTENTICAÇÃO ---
-  auth: {
-    login: async (usuario, senha) => {
-      const usuarioLimpo = (usuario || '').trim();
-      return executarRequisicao(
-        '/login',
-        {
-          method: 'POST',
-          body: JSON.stringify({ usuario: usuarioLimpo, senha: String(senha) })
-        },
-        async () => {
-          await new Promise(resolve => setTimeout(resolve, 300));
-          if (usuarioLimpo === 'coordenacao' && senha === '123456') {
-            localStorage.setItem('mafe_autenticado', 'true');
-            localStorage.setItem('mafe_token', 'token_jwt_simulado');
-            return { success: true, usuario: usuarioLimpo };
-          } else {
-            throw new Error('Usuário ou senha incorretos!');
-          }
-        }
-      ).then(dados => {
-        localStorage.setItem('mafe_autenticado', 'true');
-        if (dados && dados.token) {
-          localStorage.setItem('mafe_token', dados.token);
-        }
-        return { success: true, usuario: usuarioLimpo };
-      });
-    },
+  
+// --- AUTENTICAÇÃO ---
+auth: {
+  login: async (usuario, senha) => {
+    const usuarioLimpo = (usuario || '').trim();
 
-    logout: async () => {
+    const dados = await executarRequisicao(
+      '/login',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          usuario: usuarioLimpo,
+          senha: String(senha)
+        })
+      }
+    );
+
+    if (!dados || !dados.token) {
+      throw new Error('O servidor não retornou um token válido.');
+    }
+
+    localStorage.setItem('mafe_token', dados.token);
+    localStorage.setItem('mafe_autenticado', 'true');
+
+    return {
+      success: true,
+      usuario: dados.usuario
+    };
+  },
+
+  logout: async () => {
+    localStorage.removeItem('mafe_autenticado');
+    localStorage.removeItem('mafe_token');
+  },
+
+  verificarSessao: async () => {
+    const token = localStorage.getItem('mafe_token');
+
+    if (!token) {
+      localStorage.removeItem('mafe_autenticado');
+      return false;
+    }
+
+    try {
+      await executarRequisicao('/auth/me', {
+        method: 'GET'
+      });
+
+      localStorage.setItem('mafe_autenticado', 'true');
+      return true;
+    } catch {
       localStorage.removeItem('mafe_autenticado');
       localStorage.removeItem('mafe_token');
-    },
-
-    verificarSessao: () => {
-      return localStorage.getItem('mafe_autenticado') === 'true';
+      return false;
     }
   }
+}
 };
 
 export default api;
