@@ -42,11 +42,36 @@ export function MidiasTab() {
 
   const carregarDados = useCallback(async (exibirCarregandoPrincipal = false) => {
     if (exibirCarregandoPrincipal) setCarregando(true);
-    try {
-      const [dadosMidias, dadosCategorias] = await Promise.all([
+    try {     
+      const resultados = await Promise.allSettled([
         api.midias.listar(),
         api.categorias.listar()
       ]);
+      
+      const [resultadoMidias, resultadoCategorias] = resultados;
+      
+      if (resultadoMidias.status === 'fulfilled') {
+        setMidias(Array.isArray(resultadoMidias.value) ? resultadoMidias.value : []);
+      } else {
+        console.error('Erro ao carregar mídias:', resultadoMidias.reason);
+      }
+      
+      if (resultadoCategorias.status === 'fulfilled') {
+        setCategorias(Array.isArray(resultadoCategorias.value) ? resultadoCategorias.value : []);
+      } else {
+        console.error('Erro ao carregar categorias:', resultadoCategorias.reason);
+      }
+      
+      if (
+        resultadoMidias.status === 'rejected' ||
+        resultadoCategorias.status === 'rejected'
+      ) {
+        setFeedback({
+          tipo: 'erro',
+          mensagem: 'Alguns dados não puderam ser carregados. Tente atualizar.'
+        });
+      }
+
       setMidias(Array.isArray(dadosMidias) ? dadosMidias : []);
       setCategorias(Array.isArray(dadosCategorias) ? dadosCategorias : []);
     } catch (erro) {
