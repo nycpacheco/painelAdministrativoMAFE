@@ -11,7 +11,23 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Configuração de CORS para permitir requisições do front-end Vite/React
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+origens_permitidas = [
+    "http://localhost:5173",
+    os.getenv("FRONTEND_URL", "")
+]
+
+origens_permitidas = [
+    origem for origem in origens_permitidas if origem
+]
+
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": origens_permitidas
+        }
+    }
+)
 
 db.init_app(app)
 with app.app_context():
