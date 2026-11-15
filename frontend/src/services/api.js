@@ -193,7 +193,7 @@ const salvarNoStorage = (chave, dados) => {
 // Helper genérico para requisições com timeout rápido e fallback transparente
 async function executarRequisicao(endpoint, opcoes = {}, fallbackFn = null) {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 segundos de timeout
+  const timeoutId = setTimeout(() => controller.abort(), 15000);
 
   try {
     const token = localStorage.getItem('mafe_token');
