@@ -40,47 +40,60 @@ export function MidiasTab() {
     onConfirm: () => {}
   });
 
-  const carregarDados = useCallback(async (exibirCarregandoPrincipal = false) => {
-    if (exibirCarregandoPrincipal) setCarregando(true);
-    try {     
-      const resultados = await Promise.allSettled([
-        api.midias.listar(),
-        api.categorias.listar()
-      ]);
-      
-      const [resultadoMidias, resultadoCategorias] = resultados;
-      
-      if (resultadoMidias.status === 'fulfilled') {
-        setMidias(Array.isArray(resultadoMidias.value) ? resultadoMidias.value : []);
-      } else {
-        console.error('Erro ao carregar mídias:', resultadoMidias.reason);
-      }
-      
-      if (resultadoCategorias.status === 'fulfilled') {
-        setCategorias(Array.isArray(resultadoCategorias.value) ? resultadoCategorias.value : []);
-      } else {
-        console.error('Erro ao carregar categorias:', resultadoCategorias.reason);
-      }
-      
-      if (
-        resultadoMidias.status === 'rejected' ||
-        resultadoCategorias.status === 'rejected'
-      ) {
-        setFeedback({
-          tipo: 'erro',
-          mensagem: 'Alguns dados não puderam ser carregados. Tente atualizar.'
-        });
-      }
+  
+const carregarDados = useCallback(async (exibirCarregandoPrincipal = false) => {
+  if (exibirCarregandoPrincipal) setCarregando(true);
 
-      setMidias(Array.isArray(dadosMidias) ? dadosMidias : []);
-      setCategorias(Array.isArray(dadosCategorias) ? dadosCategorias : []);
-    } catch (erro) {
-      console.error("Erro ao carregar dados da aba Midias:", erro);
-      setFeedback({ tipo: 'erro', mensagem: 'Erro ao carregar mídias e categorias. Tente novamente.' });
-    } finally {
-      if (exibirCarregandoPrincipal) setCarregando(false);
+  try {
+    const resultados = await Promise.allSettled([
+      api.midias.listar(),
+      api.categorias.listar()
+    ]);
+
+    const [resultadoMidias, resultadoCategorias] = resultados;
+
+    if (resultadoMidias.status === 'fulfilled') {
+      setMidias(
+        Array.isArray(resultadoMidias.value)
+          ? resultadoMidias.value
+          : []
+      );
+    } else {
+      console.error('Erro ao carregar mídias:', resultadoMidias.reason);
     }
-  }, []);
+
+    if (resultadoCategorias.status === 'fulfilled') {
+      setCategorias(
+        Array.isArray(resultadoCategorias.value)
+          ? resultadoCategorias.value
+          : []
+      );
+    } else {
+      console.error('Erro ao carregar categorias:', resultadoCategorias.reason);
+    }
+
+    if (
+      resultadoMidias.status === 'rejected' ||
+      resultadoCategorias.status === 'rejected'
+    ) {
+      setFeedback({
+        tipo: 'erro',
+        mensagem: 'Alguns dados não puderam ser carregados. Tente atualizar.'
+      });
+    }
+
+  } catch (erro) {
+    console.error('Erro inesperado ao carregar dados:', erro);
+
+    setFeedback({
+      tipo: 'erro',
+      mensagem: 'Erro inesperado ao carregar os dados.'
+    });
+  } finally {
+    if (exibirCarregandoPrincipal) setCarregando(false);
+  }
+}, []);
+
 
   useEffect(() => {
     carregarDados(true);
