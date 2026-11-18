@@ -50,10 +50,10 @@ export function AdminDashboard() {
   };
 
   const titulosAbas = {
-    midias: '📁 Galeria de Mídias e Momentos',
-    categorias: '🏷️ Categorias de Eventos e Torneios',
-    apoiadores: '🤝 Apoiadores e Patrocinadores',
-    estatisticas: '📊 Estatísticas do Time'
+    midias: ' Galeria de Mídias e Momentos',
+    categorias: ' Categorias de Eventos e Torneios',
+    apoiadores: ' Apoiadores e Patrocinadores',
+    estatisticas: ' Estatísticas do Time'
   };
 
   return (
@@ -120,7 +120,7 @@ export function AdminDashboard() {
             className={styles.publicSiteButton}
             title="Ir para o Site Público"
           >
-            🌐 Ir para o Site Público ↗
+             Ir para o Site Público ↗
           </a>
 
           <button 
@@ -128,7 +128,7 @@ export function AdminDashboard() {
             onClick={() => setModalLogoutAberto(true)} 
             className={styles.logoutButton}
           >
-            🚪 Sair do Sistema
+             Sair do Sistema
           </button>
         </div>
       </aside>

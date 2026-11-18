@@ -324,8 +324,8 @@ const carregarDados = useCallback(async (exibirCarregandoPrincipal = false) => {
             aria-label="Filtrar por Tipo"
           >
             <option value="">Todos os Tipos</option>
-            <option value="foto">📷 Foto</option>
-            <option value="video">🎬 Vídeo</option>
+            <option value="foto"> Foto</option>
+            <option value="video"> Vídeo</option>
           </select>
 
           <select
@@ -362,7 +362,7 @@ const carregarDados = useCallback(async (exibirCarregandoPrincipal = false) => {
           className={styles.refreshBtn}
           title="Atualizar lista e categorias"
         >
-          🔄 Atualizar Dados
+           Atualizar Dados
         </button>
       </div>
 

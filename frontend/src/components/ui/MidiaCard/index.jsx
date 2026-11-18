@@ -85,7 +85,7 @@ export function MidiaCard({
             )}
 
             <div className={styles.zoomOverlay}>
-              <span>{isVideo ? '▶ Assistir / Detalhes' : '🔍 Ver Detalhes'}</span>
+              <span>{isVideo ? '▶ Assistir / Detalhes' : ' Ver Detalhes'}</span>
             </div>
           </>
         )}
@@ -95,7 +95,7 @@ export function MidiaCard({
         <div className={styles.headerCard}>
           <div className={styles.badges}>
             <span className={styles.tipoBadge}>
-              {isVideo ? '🎬 Vídeo' : '📷 Foto'}
+              {isVideo ? ' Vídeo' : ' Foto'}
             </span>
             <span className={midia.ativo ? styles.statusAtivo : styles.statusInativo}>
               {midia.ativo ? '● Ativo' : '○ Inativo'}
@@ -109,7 +109,7 @@ export function MidiaCard({
 
         {nomeCategoria && (
           <span className={styles.categoriaTag} title={`Categoria: ${nomeCategoria}`}>
-            🏷️ {nomeCategoria}
+             {nomeCategoria}
           </span>
         )}
 

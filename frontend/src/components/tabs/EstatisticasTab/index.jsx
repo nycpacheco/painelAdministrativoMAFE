@@ -142,7 +142,7 @@ export function EstatisticasTab() {
             className={styles.editButton} 
             onClick={() => setEditando(true)}
           >
-            ✏️ Editar Métricas
+             Editar Métricas
           </button>
         )}
       </div>
@@ -173,7 +173,7 @@ export function EstatisticasTab() {
 
       {/* Formulário de Edição */}
       <form onSubmit={handleSolicitarSalvar} className={styles.formCard}>
-        <h4>{editando ? '✏️ Modo de Edição Ativo' : '🔒 Visualização Protegida'}</h4>
+        <h4>{editando ? ' Modo de Edição Ativo' : ' Visualização Protegida'}</h4>
 
         <div className={styles.formGrid}>
           <div className={styles.inputGroup}>
