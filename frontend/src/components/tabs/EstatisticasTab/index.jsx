@@ -131,7 +131,7 @@ export function EstatisticasTab() {
 
       <div className={styles.header}>
         <div>
-          <h3>📊 Estatísticas do Projeto MAFE</h3>
+          <h3> Estatísticas do Projeto MAFE</h3>
           <p className={styles.subtitle}>
             Métricas de participantes e torneios disputados pela equipe de vôlei adaptado.
           </p>
